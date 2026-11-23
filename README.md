@@ -1,4 +1,4 @@
-# PROJECT TRACKER — Prototipo (Fase 1)
+# PROJECT TRACKER 
 
 Prototipo visual e interactivo (HTML estático). NO es la aplicación final: los datos son de ejemplo y no se guardan.
 
