@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>PROJECT TRACKER — Prototipo</title><link rel="icon" type="image/png" href="favicon.png">
+<style>
+:root{--p:#8b2cf5;--p2:#5b17d6;--bg:#0b0714;--sb:#100a1d;--card:#171027;--bd:#2a1f45;--tx:#f1ecfb;--mu:#9d90b8;--ok:#22c55e;--wa:#f59e0b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+[data-theme=black]{--bg:#000;--sb:#080808;--card:#111;--bd:#262626}
+[data-theme=white]{--bg:#f6f4fb;--sb:#fff;--card:#fff;--bd:#e5dff2;--tx:#1b1330;--mu:#6b5f85}
+[data-theme=blue]{--p:#2f6bff;--p2:#1b3fb5;--bg:#070d1c;--sb:#0a1328;--card:#0f1a35;--bd:#1f2f58}
+[data-theme=green]{--p:#16a34a;--p2:#0f6b32;--bg:#07140d;--sb:#0a1c11;--card:#0f2518;--bd:#1b3d29}
+[data-theme=pink]{--p:#ec4899;--p2:#a21caf;--bg:#16070f;--sb:#1e0a14;--card:#27101c;--bd:#4a1d33}
+*{box-sizing:border-box}html,body{margin:0;height:100%}body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--tx);font-size:14px}
+button,input,select,textarea{font:inherit;color:inherit}.v{display:none}.v.on{display:block;animation:f .3s}@keyframes f{from{opacity:0;transform:translateY(6px)}}
+.btn{background:linear-gradient(135deg,var(--p),var(--p2));border:0;color:#fff;padding:10px 16px;border-radius:10px;cursor:pointer;font-weight:600;transition:.2s}.btn:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.gh{background:transparent;border:1px solid var(--bd);color:var(--tx);padding:8px 12px;border-radius:10px;cursor:pointer}.gh:hover{border-color:var(--p)}
+input,select,textarea{width:100%;background:rgba(127,127,127,.1);border:1px solid var(--bd);border-radius:10px;padding:10px 12px;outline:0}input:focus,select:focus,textarea:focus{border-color:var(--p)}
+label{display:block;font-size:12px;color:var(--mu);margin:12px 0 5px}
+.auth{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(60% 50% at 20% 10%,#5b17d6aa,transparent),radial-gradient(50% 50% at 90% 90%,#a21cafaa,transparent),#07040f;color:#f1ecfb}
+.ac{width:100%;max-width:420px;background:rgba(255,255,255,.07);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:28px}
+.lg{padding:4px 10px;margin-bottom:18px;text-align:center}.lg img{height:62px;max-width:100%;object-fit:contain}
+.auth label{color:#c9bde6}.auth input{color:#fff}.row{display:flex;gap:10px}.row>*{flex:1}.lk{color:#c58bff;cursor:pointer;font-size:13px}
+.app{display:flex;min-height:100vh}.sb{width:240px;background:var(--sb);border-right:1px solid var(--bd);padding:14px;display:flex;flex-direction:column;gap:4px;transition:.25s;position:sticky;top:0;height:100vh}
+.sb.c{width:68px}.sb.c .t{display:none}.sb .top{display:flex;align-items:center;gap:8px;margin-bottom:14px}.sb .top img{height:40px;border-radius:10px}
+.ni{display:flex;gap:10px;align-items:center;padding:10px;border-radius:10px;color:var(--mu);cursor:pointer;white-space:nowrap}.ni:hover,.ni.on{background:color-mix(in srgb,var(--p) 18%,transparent);color:var(--tx)}
+.main{flex:1;min-width:0}.bar{display:flex;gap:10px;align-items:center;padding:14px 22px;border-bottom:1px solid var(--bd);position:sticky;top:0;background:var(--bg);z-index:5;flex-wrap:wrap}
+.bar .s{flex:1;min-width:140px;max-width:420px}.av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--p),#ec4899);display:grid;place-items:center;font-weight:700;color:#fff;cursor:pointer}
+.ct{padding:22px}h1{font-size:24px;margin:0 0 4px}.mu{color:var(--mu)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;margin-top:18px}.grid.list{grid-template-columns:1fr}
+.cd{background:var(--card);border:1px solid var(--bd);border-radius:16px;overflow:hidden;transition:.2s;box-shadow:0 4px 18px #0003}.cd:hover{transform:translateY(-3px);border-color:var(--p)}
+.cv{height:110px;display:flex;align-items:flex-end;padding:10px;position:relative}.tag{background:#0006;color:#fff;border-radius:20px;padding:3px 10px;font-size:11px}.cb{padding:14px}.cb h3{margin:0 0 4px}
+.grid.list .cd{display:flex}.grid.list .cv{width:160px;height:auto}.ft{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:12px;color:var(--mu)}
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--bd);margin:16px 0;overflow-x:auto}.tb{padding:10px 14px;cursor:pointer;color:var(--mu);border-bottom:2px solid transparent;white-space:nowrap}.tb.on{color:var(--tx);border-color:var(--p)}
+.pn{display:none}.pn.on{display:block}.it{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px;margin-bottom:8px}.it[draggable]{cursor:grab}
+.ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff}.fx{flex:1;min-width:0}
+.kb{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.col{background:rgba(127,127,127,.07);border-radius:14px;padding:10px}.col h4{margin:4px 8px 10px}
+.pr{font-size:11px;padding:2px 8px;border-radius:20px}.hi{background:#ef444433;color:#f87171}.me{background:#f59e0b33;color:#fbbf24}.lo{background:#22c55e33;color:#4ade80}
+.vd{aspect-ratio:16/9;background:linear-gradient(135deg,#1e1b4b,#7e22ce);border-radius:12px;display:grid;place-items:center;font-size:34px}
+.md{position:fixed;inset:0;background:#000a;display:none;align-items:center;justify-content:center;padding:16px;z-index:20}.md.on{display:flex}.mb{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:22px;width:100%;max-width:520px;max-height:90vh;overflow:auto}
+.sw{display:flex;gap:10px;flex-wrap:wrap}.sw span{width:34px;height:34px;border-radius:50%;cursor:pointer;border:3px solid transparent}.sw span.on{border-color:var(--tx)}
+.st{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}.st div{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px}.st b{font-size:22px;display:block}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden}td,th{padding:10px 12px;text-align:left;border-bottom:1px solid var(--bd)}th{color:var(--mu);font-size:12px}.tw{overflow-x:auto}
+.mn{display:none}@media(max-width:800px){.sb{position:fixed;left:-260px;z-index:15;width:240px}.sb.o{left:0}.mn{display:inline-block}.ct{padding:16px}}
+</style></head><body>
+
+<div class="v on auth" id="login"><div class="ac"><div class="lg"><img src="assets/logo-horizontal.png" alt="Project Tracker"></div>
+<h2 style="margin:0 0 4px">Bienvenido de nuevo</h2><div class="mu" style="margin-bottom:6px">Inicia sesión para continuar</div>
+<label>Correo electrónico o usuario</label><input placeholder="👤  tu@correo.com">
+<label>Contraseña</label><div style="position:relative"><input id="pw" type="password" value="password123"><span class="lk" style="position:absolute;right:12px;top:10px" onclick="pw.type=pw.type=='password'?'text':'password'">👁 Ver</span></div>
+<div class="row" style="margin:14px 0;align-items:center"><label style="margin:0;display:flex;gap:6px;align-items:center"><input type="checkbox" style="width:auto" checked> Recordarme</label><span class="lk" style="text-align:right">¿Olvidaste tu contraseña?</span></div>
+<button class="btn" style="width:100%" onclick="show('app');go('home')">Iniciar sesión</button>
+<p style="text-align:center;margin:16px 0 0" class="mu">¿No tienes cuenta? <span class="lk" onclick="show('reg')">Crear una cuenta</span></p></div></div>
+
+<div class="v auth" id="reg"><div class="ac"><div class="lg"><img src="assets/logo-horizontal.png" alt="Project Tracker"></div><h2 style="margin:0">Crear cuenta</h2>
+<div class="row"><div><label>Nombre</label><input></div><div><label>Apellidos</label><input></div></div>
+<label>Nombre de usuario</label><input><label>Correo electrónico</label><input type="email">
+<label>Contraseña</label><input type="password" oninput="sg.style.width=Math.min(100,this.value.length*10)+'%'"><div style="height:5px;background:#fff2;border-radius:5px;margin-top:6px"><div id="sg" style="height:5px;width:0;background:linear-gradient(90deg,#ef4444,#22c55e);border-radius:5px;transition:.3s"></div></div><small class="mu">Mínimo 8 caracteres, mayúsculas, números y símbolos.</small>
+<label>Confirmar contraseña</label><input type="password"><br><br><button class="btn" style="width:100%" onclick="show('app');go('home')">Registrarme</button>
+<p style="text-align:center;margin:16px 0 0" class="mu"><span class="lk" onclick="show('login')">← Volver al inicio de sesión</span></p></div></div>
+
+<div class="v" id="app"><div class="app">
+<aside class="sb" id="sb"><div class="top"><img id="ico" src="assets/icono.png" alt=""><img class="t" src="assets/logo-horizontal.png" style="height:34px;background:#fff;border-radius:8px;padding:3px" alt=""></div>
+<div class="ni on" data-g="home" onclick="go('home')">🏠<span class="t">Inicio</span></div><div class="ni" onclick="go('home')">📁<span class="t">Mis espacios</span></div><div class="ni" onclick="go('home')">🌐<span class="t">Todos los espacios</span></div><div class="ni" onclick="go('home')">🕒<span class="t">Recientes</span></div><div class="ni" onclick="go('home')">⭐<span class="t">Favoritos</span></div><div class="ni" onclick="go('home')">🤝<span class="t">Compartidos conmigo</span></div><div class="ni" onclick="go('home')">🗑<span class="t">Papelera</span></div>
+<div class="ni" data-g="admin" onclick="go('admin')">🛡<span class="t">Administración</span></div><div style="flex:1"></div><div class="ni" data-g="profile" onclick="go('profile')">⚙️<span class="t">Ajustes</span></div><div class="ni" onclick="document.getElementById('sb').classList.toggle('c')">↔<span class="t">Contraer</span></div></aside>
+<div class="main"><div class="bar"><button class="gh mn" onclick="sb.classList.toggle('o')">☰</button><input class="s" placeholder="🔍  Buscar espacios, tareas, archivos…"><span style="flex:1"></span><button class="gh">🔔</button><div class="av" onclick="go('profile')">DH</div><button class="btn" onclick="md.classList.add('on')">+ Nuevo espacio</button></div>
+<div class="ct">
+
+<div class="v on" id="home"><h1>Buenos días, Darius 👋</h1><div class="mu">Tienes 5 tareas pendientes en tus espacios.</div>
+<div style="display:flex;justify-content:space-between;margin-top:16px"><b>Mis espacios</b><span><button class="gh" onclick="gr.classList.remove('list')">▦</button> <button class="gh" onclick="gr.classList.add('list')">☰</button></span></div><div class="grid" id="gr"></div></div>
+
+<div class="v" id="space"><span class="lk" onclick="go('home')">← Mis espacios</span><h1 id="sn" style="margin-top:8px">Lanzamiento Web 2026</h1><div class="mu">Plan de proyecto, recursos y seguimiento · <button class="gh" style="padding:4px 10px">Editar espacio</button></div>
+<div class="tabs" id="tabs"></div>
+<div class="pn on" id="p0"><div style="display:flex;justify-content:space-between;margin-bottom:12px"><b>Apartados <small class="mu">(arrastra para reordenar)</small></b><button class="btn">+ Nuevo apartado</button></div><div id="dl">
+<div class="it" draggable="true"><div class="ic" style="background:#ef4444">PDF</div><div class="fx"><b>Briefing_cliente.pdf</b><br><small class="mu">2,4 MB · hace 2 h</small></div><button class="gh">⬇</button></div>
+<div class="it" draggable="true"><div class="ic" style="background:#2563eb">DOC</div><div class="fx"><b>Propuesta.docx</b><br><small class="mu">380 KB · ayer</small></div><button class="gh">⬇</button></div>
+<div class="it" draggable="true"><div class="ic" style="background:#16a34a">XLS</div><div class="fx"><b>Presupuesto.xlsx</b><br><small class="mu">96 KB · ayer</small></div><button class="gh">⬇</button></div>
+<div class="it" style="border-style:dashed;justify-content:center;color:var(--mu)">⬆ Arrastra archivos aquí o <span class="lk">súbelos</span></div></div>
+<b>Subsecciones</b><div class="it" style="margin-top:8px">📂 <div class="fx">Diseño <small class="mu">· 4 elementos</small></div>›</div><div class="it">📂 <div class="fx">Marketing <small class="mu">· 7 elementos</small></div>›</div></div>
+<div class="pn" id="p1"><div class="kb">
+<div class="col"><h4>Pendiente</h4><div class="it" style="display:block"><b>Definir paleta</b><br><span class="pr hi">Alta</span> <small class="mu">30 nov</small></div><div class="it" style="display:block"><b>Revisar copy</b><br><span class="pr me">Media</span> <small class="mu">2 dic</small></div></div>
+<div class="col"><h4>En proceso</h4><div class="it" style="display:block"><b>Maquetar landing</b><br><span class="pr hi">Alta</span> <small class="mu">28 nov</small></div></div>
+<div class="col"><h4>Completada</h4><div class="it" style="display:block"><b>Kick-off</b><br><span class="pr lo">Baja</span> <small class="mu">15 nov</small></div></div></div></div>
+<div class="pn" id="p2"><div class="grid"><div class="cd"><div class="vd">▶</div><div class="cb"><b>Tutorial de onboarding</b><br><small class="mu">YouTube · reproductor integrado</small></div></div><div class="cd"><div class="cb"><b>🔗 Guía de estilo</b><br><small class="mu">figma.com/…</small></div></div><div class="cd"><div class="cb"><b>📝 Nota rápida</b><br><small class="mu">Ideas para la reunión del lunes…</small></div></div></div><br><button class="btn">+ Añadir vídeo o enlace</button></div></div>
+
+<div class="v" id="profile"><h1>Perfil y ajustes</h1><div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+<div class="cd cb"><b>Datos personales</b><div style="display:flex;gap:12px;align-items:center;margin:12px 0"><div class="av" style="width:56px;height:56px">DH</div><button class="gh">Cambiar foto</button></div><label>Nombre</label><input value="Darius"><label>Correo</label><input value="dariusheredea6@gmail.com"><label>Contraseña</label><button class="gh">Cambiar contraseña</button></div>
+<div class="cd cb"><b>Tema visual</b><p class="mu">Se guarda en tu perfil.</p><div class="sw" id="sw"></div><label>Color personalizado</label><input type="color" value="#8b2cf5" style="height:42px;padding:3px" oninput="document.documentElement.style.setProperty('--p',this.value)"><label>Notificaciones</label><label style="display:flex;gap:8px;color:var(--tx)"><input type="checkbox" style="width:auto" checked> Email · tareas por vencer</label></div>
+<div class="cd cb"><b>Sesiones activas</b><div class="it" style="margin-top:12px">💻<div class="fx">Chrome · Valencia<br><small class="mu">Esta sesión</small></div></div><div class="it">📱<div class="fx">iPhone<br><small class="mu">Hace 2 días</small></div><button class="gh">Cerrar</button></div><button class="gh" onclick="show('login')">Cerrar sesión</button></div></div></div>
+
+<div class="v" id="admin"><h1>Panel de administración <span class="pr hi">Propietario</span></h1><div class="mu">Acceso de superadministrador</div>
+<div class="st"><div><b>128</b>Usuarios</div><div><b>9</b>Organizaciones</div><div><b>342</b>Espacios</div><div><b>18,6 GB</b>Almacenamiento</div></div>
+<div class="tabs"><div class="tb on">Usuarios</div><div class="tb">Organizaciones</div><div class="tb">Equipos</div><div class="tb">Roles</div><div class="tb">Actividad</div><div class="tb">Seguridad</div><div class="tb">Configuración</div></div>
+<div class="tw"><table><tr><th>Usuario</th><th>Organización</th><th>Rol</th><th>Estado</th><th></th></tr>
+<tr><td>Darius H.</td><td>—</td><td><span class="pr hi">Propietario</span></td><td>Activo</td><td>🔒</td></tr><tr><td>Laura M.</td><td>Acme S.L.</td><td>Administrador</td><td>Activo</td><td><button class="gh">Editar</button></td></tr><tr><td>Pablo R.</td><td>Acme S.L.</td><td>Editor</td><td>Activo</td><td><button class="gh">Editar</button></td></tr><tr><td>Marta G.</td><td>Studio 21</td><td>Lector</td><td>Invitado</td><td><button class="gh">Editar</button></td></tr></table></div></div>
+
+</div></div></div></div>
+
+<div class="md" id="md" onclick="if(event.target==this)this.classList.remove('on')"><div class="mb"><h2 style="margin:0">Nuevo espacio</h2><label>Nombre</label><input placeholder="Ej. Lanzamiento Web"><label>Descripción</label><textarea rows="2"></textarea>
+<div class="row"><div><label>Categoría</label><select><option>Proyecto</option><option>Documentación</option><option>Formación</option></select></div><div><label>Privacidad</label><select><option>Privado</option><option>Compartido</option></select></div></div>
+<label>Portada</label><div class="sw" id="cvs"></div><label>Imagen personalizada</label><button class="gh">⬆ Subir imagen</button><label>Etiquetas</label><input placeholder="diseño, web…">
+<div style="display:flex;justify-content:flex-end;gap:8px;margin-top:18px"><button class="gh" onclick="md.classList.remove('on')">Cancelar</button><button class="btn" onclick="md.classList.remove('on')">Crear espacio</button></div></div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+function show(id){document.querySelectorAll('body>.v').forEach(e=>e.classList.remove('on'));$(id).classList.add('on')}
+function go(id){document.querySelectorAll('.ct>.v').forEach(e=>e.classList.remove('on'));$(id).classList.add('on');document.querySelectorAll('.ni').forEach(n=>n.classList.toggle('on',n.dataset.g==id));$('sb').classList.remove('o')}
+const G=['linear-gradient(135deg,#8b2cf5,#4c1d95)','linear-gradient(135deg,#ec4899,#7e22ce)','linear-gradient(135deg,#2563eb,#7c3aed)','linear-gradient(135deg,#0d9488,#4f46e5)','linear-gradient(135deg,#f59e0b,#ec4899)'];
+const S=[['Lanzamiento Web 2026','Plan, recursos y seguimiento','Proyecto','Hoy','12 elementos'],['Biblioteca de marca','Guías y activos de identidad','Documentación','Ayer','31 elementos'],['Formación equipo','Cursos y vídeos internos','Formación','hace 3 días','8 elementos'],['Finanzas Q4','Presupuestos y facturas','Proyecto','hace 1 sem','19 elementos']];
+$('gr').innerHTML=S.map((s,i)=>`<div class="cd"><div class="cv" style="background:${G[i]}"><span class="tag">${s[2]}</span></div><div class="cb"><h3>${s[0]}</h3><div class="mu">${s[1]}</div><div class="ft"><span>${s[3]} · ${s[4]}</span><span>⭐ ✏ ⧉ 🗑</span></div><br><button class="btn" style="width:100%" onclick="$('sn').textContent='${s[0]}';go('space')">Abrir espacio</button></div></div>`).join('');
+$('cvs').innerHTML=G.map((g,i)=>`<span class="${i?'':'on'}" style="background:${g}" onclick="[...cvs.children].forEach(c=>c.classList.remove('on'));this.classList.add('on')"></span>`).join('');
+['Contenido','Tareas','Vídeos y enlaces'].forEach((t,i)=>{const d=document.createElement('div');d.className='tb'+(i?'':' on');d.textContent=t;d.onclick=()=>{[...$('tabs').children].forEach((x,j)=>{x.classList.toggle('on',j==i);$('p'+j).classList.toggle('on',j==i)})};$('tabs').appendChild(d)});
+const T={purple:['#8b2cf5',''],black:['#444','black'],white:['#e5dff2','white'],blue:['#2f6bff','blue'],green:['#16a34a','green'],pink:['#ec4899','pink']};
+Object.entries(T).forEach(([k,v])=>{const s=document.createElement('span');s.style.background=v[0];s.title=k;if(k=='purple')s.className='on';s.onclick=()=>{document.documentElement.style.removeProperty('--p');document.documentElement.dataset.theme=v[1];[...$('sw').children].forEach(c=>c.classList.remove('on'));s.classList.add('on')};$('sw').appendChild(s)});
+let dr;document.querySelectorAll('#dl .it[draggable]').forEach(e=>{e.ondragstart=()=>dr=e;e.ondragover=x=>x.preventDefault();e.ondrop=()=>{e.parentNode.insertBefore(dr,e)}});
+</script></body></html>
