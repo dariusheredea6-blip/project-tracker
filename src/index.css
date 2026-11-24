@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body { @apply bg-[#0b0714] text-violet-50 antialiased; font-family: Inter, system-ui, sans-serif; }
+}
+@layer components {
+  .input { @apply w-full rounded-xl border border-white/15 bg-white/10 px-3 py-2.5 text-white placeholder-violet-300/50 outline-none focus:border-violet-400; }
+  .btn { @apply w-full rounded-xl bg-gradient-to-br from-violet-500 to-violet-800 px-4 py-2.5 font-semibold text-white transition hover:brightness-110 disabled:opacity-60; }
+  .lbl { @apply mb-1 mt-3 block text-xs text-violet-200/80; }
+  .lnk { @apply cursor-pointer text-violet-300 hover:text-violet-200; }
+}
